@@ -18,7 +18,7 @@ export function ContributionPlanner() {
       setErrorMsg(null)
       const { address } = await freighterApi.getAddress()
       if (!address) throw new Error('Conecta tu wallet primero')
-      const tx = await lockFunds(address, scenario.monthlyDepositUsd)
+      const tx = await lockFunds(address, Number(scenario.monthlyDepositUsd))
       const signedXdr = await firmarTransaccion(tx.toXDR())
       const hash = await enviarTransaccion(signedXdr)
       setTxHash(hash)
