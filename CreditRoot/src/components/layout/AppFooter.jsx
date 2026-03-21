@@ -1,20 +1,19 @@
 export function AppFooter() {
   return (
-    <footer className="app-footer">
-      <div className="shell-container">
-        <div className="footer-panel">
-          <div>
-            <strong>Frontend base listo para el nuevo pitch.</strong>
-            <p className="footer-copy">
-              La siguiente capa natural es conectar estas pantallas con datos
-              reales, routing y contratos Soroban.
-            </p>
-          </div>
-          <div>
-            <strong>Stack</strong>
-            <p className="footer-copy">React + Vite + Accesly + mock data</p>
-          </div>
+    <footer className="py-4"
+      style={{ borderTop: '1px solid rgba(255,255,255,0.05)', backgroundColor: '#050505' }}>
+      <div className="container d-flex flex-wrap justify-content-between align-items-center gap-3">
+
+        <span className="fw-black" style={{ letterSpacing: '-1px', color: '#fff' }}>
+          RETIRO<span style={{ color: '#3b82f6' }}>CHAIN</span>
+        </span>
+
+        <div className="d-flex gap-4 flex-wrap">
+          <span className="text-white-50 small">React + Vite + Stellar SDK</span>
+          <span className="text-white-50 small">Powered by Etherfuse</span>
+          <span className="text-white-50 small">Stellar Testnet</span>
         </div>
+
       </div>
     </footer>
   )

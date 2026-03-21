@@ -1,54 +1,71 @@
 import { ConnectAccountCard } from '../features/access/components/ConnectAccountCard'
-import { MetricCard } from '../components/common/MetricCard'
-import { retirementInsights, retirementStats } from '../data/retirementContent'
 
 export function HomeScreen() {
   return (
-    <section id="inicio" className="screen screen--hero">
-      <div className="shell-container hero-layout">
-        <div className="hero-copy">
-          <span className="eyebrow">Retiro voluntario protegido</span>
-          <h2 className="hero-title">
-            El frontend para explicar por que el retiro tradicional no alcanza.
-          </h2>
-          <p className="hero-body">
-            Esta primera estructura de front esta pensada para el nuevo relato:
-            ahorro voluntario en USDC, onboarding accesible y proyeccion clara
-            del retiro complementario.
-          </p>
+    <section id="inicio" className="py-5"
+      style={{ backgroundColor: '#050505', color: '#fff', fontFamily: "'Inter', sans-serif" }}>
+      <div className="container py-4">
+        <div className="row align-items-center g-5">
 
-          <div className="hero-actions">
-            <a className="button-primary" href="#proyeccion">
-              Ver simulador
-            </a>
-            <a className="button-secondary" href="#dashboard">
-              Ver estructura del dashboard
-            </a>
-          </div>
+          {/* Copy izquierdo */}
+          <div className="col-lg-6">
+            <div className="badge rounded-pill mb-3 px-3 py-2"
+              style={{ backgroundColor: 'rgba(59,130,246,0.1)', color: '#3b82f6', border: '1px solid rgba(59,130,246,0.2)' }}>
+              🔒 Ahorro voluntario protegido en Stellar
+            </div>
 
-          <div className="screen-grid screen-grid--metrics">
-            {retirementStats.map((stat) => (
-              <MetricCard
-                key={stat.label}
-                caption={stat.caption}
-                label={stat.label}
-                tone={stat.tone}
-                value={stat.value}
-              />
-            ))}
-          </div>
+            <h2 className="fw-bold mb-4" style={{ letterSpacing: '-2px', lineHeight: 1, fontSize: '3rem' }}>
+              Tu retiro,<br />
+              <span style={{ opacity: 0.4 }}>empieza aquí.</span>
+            </h2>
 
-          <div className="section-card">
-            <h3>Que resuelve esta base de UI</h3>
-            <ul className="list-card">
-              {retirementInsights.map((insight) => (
-                <li key={insight}>{insight}</li>
+            <p className="text-white-50 fs-5 mb-5 pe-lg-4">
+              Conecta tu wallet Freighter, deposita en USDC y bloquea tu ahorro.
+              Sin banco, sin IMSS, sin burocracia.
+            </p>
+
+            <div className="d-flex gap-3 flex-wrap mb-5">
+              <a href="#proyeccion"
+                className="btn btn-primary btn-lg px-5 py-3 rounded-4 fw-bold"
+                style={{ background: 'linear-gradient(45deg, #2563eb, #3b82f6)', border: 'none' }}>
+                Ver simulador →
+              </a>
+              <a href="#dashboard"
+                className="btn btn-outline-secondary btn-lg px-5 py-3 rounded-4 fw-bold">
+                Ver dashboard
+              </a>
+            </div>
+
+            {/* Stats */}
+            <div className="row g-3">
+              {[
+                { val: '32M', label: 'Mexicanos sin pensión', color: 'text-primary' },
+                { val: '~9% APY', label: 'Rendimiento CETES', color: 'text-success' },
+                { val: '$50 MXN', label: 'Para empezar', color: 'text-warning' },
+                { val: '0%', label: 'Comisiones', color: 'text-info' },
+              ].map((s) => (
+                <div className="col-6" key={s.label}>
+                  <div className="p-3 rounded-4"
+                    style={{ backgroundColor: '#0c0c0c', border: '1px solid rgba(255,255,255,0.06)' }}>
+                    <div className={`fw-bold fs-4 ${s.color}`}>{s.val}</div>
+                    <div className="text-white-50 small">{s.label}</div>
+                  </div>
+                </div>
               ))}
-            </ul>
+            </div>
           </div>
-        </div>
 
-        <ConnectAccountCard />
+          {/* ConnectAccountCard derecha */}
+          <div className="col-lg-5 offset-lg-1">
+            <div className="p-1 rounded-5"
+              style={{ background: 'linear-gradient(145deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%)' }}>
+              <div className="p-4 rounded-5" style={{ backgroundColor: '#0c0c0c' }}>
+                <ConnectAccountCard />
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
     </section>
   )
