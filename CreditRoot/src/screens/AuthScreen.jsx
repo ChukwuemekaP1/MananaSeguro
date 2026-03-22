@@ -7,6 +7,11 @@ export function AuthScreen({ modo, onAuth, onVolver }) {
     const [error, setError] = useState(null)
     const [showPin, setShowPin] = useState(false)
     const [isFocused, setIsFocused] = useState(null)
+    const eyeIconStyle = {
+        width: '20px',
+        height: '20px',
+        display: 'block'
+    }
 
     function handleSubmit(e) {
         e.preventDefault()
@@ -80,10 +85,11 @@ export function AuthScreen({ modo, onAuth, onVolver }) {
                                         />
                                     </div>
 
-                                    <div className="position-relative">
+                                    <div>
                                         <label className="small text-white-50 mb-2 d-block">PIN DE ACCESO</label>
+                                        <div className="position-relative">
                                         <input type={showPin ? 'text' : 'password'}
-                                            className="w-100 rounded-4 fs-4" style={getInputStyle('pin')}
+                                            className="w-100 rounded-4 fs-4" style={{ ...getInputStyle('pin'), paddingRight: '56px' }}
                                             placeholder="••••••" maxLength={6}
                                             onFocus={() => setIsFocused('pin')}
                                             onBlur={() => setIsFocused(null)}
@@ -91,11 +97,34 @@ export function AuthScreen({ modo, onAuth, onVolver }) {
                                             onChange={(e) => setForm({ ...form, pin: e.target.value })}
                                         />
                                         <button type="button"
-                                            className="btn position-absolute end-0 bottom-0 mb-2 me-2 p-0 text-white-50 small"
+                                            className="position-absolute p-0 d-flex align-items-center justify-content-center pin-toggle-btn"
                                             onClick={() => setShowPin(!showPin)}
-                                            style={{ border: 'none', background: 'none' }}>
-                                            {showPin ? 'Ocultar' : 'Ver'}
+                                            aria-label={showPin ? 'Ocultar PIN' : 'Mostrar PIN'}
+                                            style={{
+                                                top: '50%',
+                                                right: '16px',
+                                                transform: 'translateY(-50%)',
+                                                width: '28px',
+                                                height: '28px',
+                                                border: 'none',
+                                                background: 'none',
+                                                color: 'rgba(255,255,255,0.55)'
+                                            }}>
+                                            {showPin ? (
+                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={eyeIconStyle}>
+                                                    <path d="M3 3l18 18" />
+                                                    <path d="M10.58 10.58a2 2 0 0 0 2.83 2.83" />
+                                                    <path d="M9.88 5.09A9.77 9.77 0 0 1 12 4.91c5 0 9.27 3.11 11 7.5a11.8 11.8 0 0 1-4.24 5.09" />
+                                                    <path d="M6.61 6.61A11.76 11.76 0 0 0 1 12.41c1.12 2.83 3.33 5.08 6.08 6.25" />
+                                                </svg>
+                                            ) : (
+                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={eyeIconStyle}>
+                                                    <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12Z" />
+                                                    <circle cx="12" cy="12" r="3" />
+                                                </svg>
+                                            )}
                                         </button>
+                                        </div>
                                     </div>
 
                                     {error && (
@@ -125,6 +154,7 @@ export function AuthScreen({ modo, onAuth, onVolver }) {
             <style>{`
                 input::placeholder { color: rgba(255,255,255,0.2); }
                 .fw-black { font-weight: 900; }
+                .pin-toggle-btn:hover { color: rgba(255,255,255,0.85) !important; }
             `}</style>
         </div>
     )
